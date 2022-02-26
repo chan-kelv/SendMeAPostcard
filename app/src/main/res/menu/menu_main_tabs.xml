@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--Item id's must match nav graph id to show as a tab-->
+    <item
+        android:id="@+id/nav_left_tab"
+        android:title="TabOne"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/nav_right_tab"
+        android:title="TabTwo"
+        app:showAsAction="always"/>
+</menu>

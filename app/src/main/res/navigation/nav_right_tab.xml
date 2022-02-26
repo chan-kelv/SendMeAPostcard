@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_right_tab"
+    app:startDestination="@id/rightMainFragment">
+
+    <fragment
+        android:id="@+id/rightMainFragment"
+        android:name="com.kelvin.bootstrap.ui.rightTab.RightMainFragment"
+        android:label="RightMainFragment"
+        tools:layout="@layout/fragment_simple">
+        <action
+            android:id="@+id/action_rightMainFragment_to_rightSecondaryFragment"
+            app:destination="@id/rightSecondaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rightSecondaryFragment"
+        android:name="com.kelvin.bootstrap.ui.rightTab.RightSecondFragment"
+        android:label="RightSecondaryFragment"
+        tools:layout="@layout/fragment_simple"/>
+</navigation>
