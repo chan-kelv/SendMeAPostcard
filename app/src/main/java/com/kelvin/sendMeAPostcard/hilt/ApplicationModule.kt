@@ -1,6 +1,7 @@
 package com.kelvin.sendMeAPostcard.hilt
 
 import android.content.Context
+import com.kelvin.sendMeAPostcard.data.preference.UserSettingsSharedPrefManager
 import com.kelvin.sendMeAPostcard.util.TextResUtil
 import dagger.Module
 import dagger.Provides
@@ -19,4 +20,9 @@ object ApplicationModule {
     @Singleton
     @Provides
     fun providesTextResUtil(@ApplicationContext context: Context) = TextResUtil(context)
+
+    @Singleton
+    @Provides
+    fun providesUserSharedPreference(@ApplicationContext context: Context) =
+        UserSettingsSharedPrefManager(context)
 }
