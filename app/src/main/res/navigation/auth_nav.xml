@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.kelvin.sendMeAPostcard.ui.auth.splash.SplashFragment"
+        android:name="com.kelvin.PostcardZ.ui.auth.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash_loading">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/authLandingFragment"
-        android:name="com.kelvin.sendMeAPostcard.ui.auth.AuthLandingFragment"
+        android:name="com.kelvin.PostcardZ.ui.auth.AuthLandingFragment"
         android:label="AuthLandingFragment"
         tools:layout="@layout/fragment_auth_main_landing"/>
 
