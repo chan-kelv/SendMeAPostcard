@@ -1,2 +1,2 @@
-# BootstrapMVVM
-A quick way to get the scaffolding of an app running
+# SendMeAPostcard
+Send your friends a postcard!

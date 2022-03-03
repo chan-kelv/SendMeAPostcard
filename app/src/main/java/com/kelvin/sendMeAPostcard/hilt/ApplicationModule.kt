@@ -1,14 +1,12 @@
-package com.kelvin.bootstrap.hilt
+package com.kelvin.sendMeAPostcard.hilt
 
 import android.content.Context
-import com.kelvin.bootstrap.util.TextResUtil
+import com.kelvin.sendMeAPostcard.util.TextResUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import timber.log.Timber
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

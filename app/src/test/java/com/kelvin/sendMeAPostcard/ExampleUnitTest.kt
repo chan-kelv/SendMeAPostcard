@@ -1,4 +1,4 @@
-package com.kelvin.bootstrap
+package com.kelvin.sendMeAPostcard
 
 import org.junit.Test
 

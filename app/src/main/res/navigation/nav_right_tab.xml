@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/rightMainFragment"
-        android:name="com.kelvin.bootstrap.ui.rightTab.RightMainFragment"
+        android:name="com.kelvin.sendMeAPostcard.ui.rightTab.RightMainFragment"
         android:label="RightMainFragment"
         tools:layout="@layout/fragment_simple">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/rightSecondaryFragment"
-        android:name="com.kelvin.bootstrap.ui.rightTab.RightSecondFragment"
+        android:name="com.kelvin.sendMeAPostcard.ui.rightTab.RightSecondFragment"
         android:label="RightSecondaryFragment"
         tools:layout="@layout/fragment_simple"/>
 </navigation>

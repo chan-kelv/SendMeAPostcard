@@ -1,4 +1,4 @@
-package com.kelvin.bootstrap.util
+package com.kelvin.sendMeAPostcard.util
 
 import android.content.Context
 import android.text.SpannableString

@@ -1,4 +1,4 @@
-package com.kelvin.bootstrap.ui.rightTab
+package com.kelvin.sendMeAPostcard.ui.rightTab
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.kelvin.bootstrap.R
-import com.kelvin.bootstrap.databinding.FragmentSimpleBinding
+import com.kelvin.sendMeAPostcard.R
+import com.kelvin.sendMeAPostcard.databinding.FragmentSimpleBinding
 
 class RightMainFragment: Fragment() {
     // don't use this one - only for setup

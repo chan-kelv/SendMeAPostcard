@@ -1,11 +1,11 @@
-package com.kelvin.bootstrap
+package com.kelvin.sendMeAPostcard
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class BootstrapApplication : Application() {
+class PostcardApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 

@@ -1,11 +1,11 @@
-package com.kelvin.bootstrap.ui.leftTab
+package com.kelvin.sendMeAPostcard.ui.leftTab
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kelvin.bootstrap.databinding.FragmentSimpleBinding
+import com.kelvin.sendMeAPostcard.databinding.FragmentSimpleBinding
 
 class LeftSecondFragment : Fragment() {
     // don't use this one - only for setup
