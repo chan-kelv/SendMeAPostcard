@@ -47,7 +47,7 @@
         android:id="@+id/passwordReq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="password 8 char min"
+        android:text="password 6 char min"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="@id/password_layout"
         app:layout_constraintBottom_toTopOf="@+id/username_layout"
@@ -72,7 +72,21 @@
             android:hint="Name"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    <TextView
+        android:id="@+id/nameInstructionsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your sign off on the postcards"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/username_layout"
+        app:layout_constraintStart_toStartOf="@id/username_layout"/>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/register_group"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="nameInstructionsText, username_layout"/>
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"

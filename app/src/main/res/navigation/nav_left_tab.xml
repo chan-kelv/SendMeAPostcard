@@ -6,7 +6,7 @@
     app:startDestination="@id/leftMainFragment">
     <fragment
         android:id="@+id/leftMainFragment"
-        android:name="com.kelvin.PostcardZ.ui.leftTab.LeftMainFragment"
+        android:name="com.kelvin.postcardz.ui.leftTab.LeftMainFragment"
         android:label="LeftMainFragment"
         tools:layout="@layout/fragment_simple">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/leftTabSecondFragment"
-        android:name="com.kelvin.PostcardZ.ui.leftTab.LeftSecondFragment"
+        android:name="com.kelvin.postcardz.ui.leftTab.LeftSecondFragment"
         android:label="LeftTabSecondFragment"
         tools:layout="@layout/fragment_simple"/>
 </navigation>
