@@ -1,19 +1,25 @@
 package com.kelvin.postcardz.ui.auth
 
 import android.util.Patterns
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.kelvin.postcardz.data.UserManager
+import com.kelvin.postcardz.data.model.UserProfile
 import com.kelvin.postcardz.ui.base.PostcardBaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
+import javax.inject.Inject
 
-class AuthLandingViewModel: PostcardBaseViewModel() {
+@HiltViewModel
+class AuthLandingViewModel @Inject constructor(
+    private val userManager: UserManager
+): PostcardBaseViewModel() {
     private val _emailError = MutableSharedFlow<String>()
     val emailError = _emailError.asSharedFlow()
 
@@ -22,6 +28,9 @@ class AuthLandingViewModel: PostcardBaseViewModel() {
 
     private val _userNameError = MutableSharedFlow<String>()
     val userNameError: SharedFlow<String> = _userNameError
+
+    private val _userAuthenticated = MutableSharedFlow<UserProfile?>()
+    val userAuthenticated = _userAuthenticated.asSharedFlow()
 
     suspend fun validateLogin(email: String?, password: String?): Boolean {
         val emailErrorString = validEmail(email)
@@ -55,12 +64,21 @@ class AuthLandingViewModel: PostcardBaseViewModel() {
                 auth.currentUser?.let {
                     Timber.d("Welcome ${it.email}")
                     val db = Firebase.database
-                    db.getReference("ID_USERNAMES").child(it.uid).setValue(userName)
+                    val user = UserProfile(email, userName)
+                    db.getReference("ID_USERPROFILE").child(it.uid).setValue(user)
+                    viewModelScope.launch {
+                        val success = _userAuthenticated.emit(user)
+                        Timber.d("$success")
+                    }
                 }
             } else {
-                _networkError.tryEmit(task.exception)
+                _toastError.tryEmit(task.exception)
             }
         }
+    }
+
+    fun setAuthenticatedUser(user: UserProfile) {
+        userManager.currentUser = user
     }
 
     private fun validEmail(email: String?): String {

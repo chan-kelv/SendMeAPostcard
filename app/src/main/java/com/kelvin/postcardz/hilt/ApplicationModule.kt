@@ -1,6 +1,7 @@
 package com.kelvin.postcardz.hilt
 
 import android.content.Context
+import com.kelvin.postcardz.data.UserManager
 import com.kelvin.postcardz.data.preference.UserSettingsSharedPrefManager
 import com.kelvin.postcardz.util.TextResUtil
 import dagger.Module
@@ -25,4 +26,8 @@ object ApplicationModule {
     @Provides
     fun providesUserSharedPreference(@ApplicationContext context: Context) =
         UserSettingsSharedPrefManager(context)
+
+    @Singleton
+    @Provides
+    fun providesUserManager() = UserManager()
 }

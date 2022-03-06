@@ -1,14 +1,17 @@
 package com.kelvin.postcardz.ui.auth
 
+import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.kelvin.postcardz.databinding.FragmentAuthMainLandingBinding
-import kotlinx.coroutines.Dispatchers
+import com.kelvin.postcardz.ui.HomeActivity
+import com.kelvin.postcardz.ui.auth.AuthLandingFragment.Companion.navigateToAuthLandingFragment
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 fun AuthLandingFragment.setupViewBindings(
     authViewModel: AuthLandingViewModel,
@@ -29,6 +32,25 @@ fun AuthLandingFragment.setupViewBindings(
             launch {
                 authViewModel.userNameError.collectLatest {
                     authBinding.usernameLayout.error = it
+                }
+            }
+            launch {
+                authViewModel.toastError.collect {
+                    Toast.makeText(this@setupViewBindings.requireContext(),
+                    "Error: $it",
+                    Toast.LENGTH_LONG).show()
+                }
+            }
+            launch {
+                authViewModel.userAuthenticated.collectLatest { userProfile ->
+                    userProfile?.let {
+                        authViewModel.setAuthenticatedUser(it)
+                        val intent = Intent(this@setupViewBindings.requireActivity(), HomeActivity::class.java)
+                        startActivity(intent)
+                        this@setupViewBindings.requireActivity().finish()
+                    } ?: run {
+                        // user error - reset everything and try again
+                    }
                 }
             }
         }

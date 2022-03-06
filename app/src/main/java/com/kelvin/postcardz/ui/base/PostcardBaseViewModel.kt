@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import java.lang.Exception
 
 abstract class PostcardBaseViewModel: ViewModel() {
-    protected val _networkError = MutableSharedFlow<Exception?>()
-    val networkError = _networkError.asSharedFlow()
+    protected val _toastError = MutableSharedFlow<Exception?>()
+    val toastError = _toastError.asSharedFlow()
 }
