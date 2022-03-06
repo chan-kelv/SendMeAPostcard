@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.kelvin.postcardz.R
 import com.kelvin.postcardz.databinding.FragmentAuthMainLandingBinding
 import com.kelvin.postcardz.ui.base.PostcardBaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthLandingFragment: PostcardBaseFragment() {
@@ -37,8 +40,9 @@ class AuthLandingFragment: PostcardBaseFragment() {
     private val loginClickHandler = View.OnClickListener {
         val emailText = authViewBinding.emailInput.text.toString()
         val passwordText = authViewBinding.passwordInput.text.toString()
-
-        authViewModel.validateLogin(emailText, passwordText)
+        authViewModel.viewModelScope.launch {
+            authViewModel.validateLogin(emailText, passwordText)
+        }
     }
 
     private val registerClickHandler = View.OnClickListener {
@@ -51,7 +55,9 @@ class AuthLandingFragment: PostcardBaseFragment() {
         val emailText = authViewBinding.emailInput.text.toString()
         val passwordText = authViewBinding.passwordInput.text.toString()
         val userNameText = authViewBinding.usernameInput.text.toString()
-        authViewModel.validateRegister(emailText, passwordText, userNameText)
+        authViewModel.viewModelScope.launch {
+            val registerInputValid =  authViewModel.validateRegister(emailText, passwordText, userNameText)
+        }
     }
 
     companion object {

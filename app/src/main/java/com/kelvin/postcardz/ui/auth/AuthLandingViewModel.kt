@@ -1,39 +1,42 @@
 package com.kelvin.postcardz.ui.auth
 
 import android.util.Patterns
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.kelvin.postcardz.ui.base.PostcardBaseViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 class AuthLandingViewModel: PostcardBaseViewModel() {
-    private val _emailError = MutableLiveData<String>()
-    val emailError: LiveData<String> = _emailError
+    private val _emailError = MutableSharedFlow<String>()
+    val emailError = _emailError.asSharedFlow()
 
-    private val _passwordError = MutableLiveData<String>()
-    val passwordError: LiveData<String> = _passwordError
+    private val _passwordError = MutableSharedFlow<String>()
+    val passwordError = _passwordError.asSharedFlow()
 
-    private val _userNameError = MutableLiveData<String>()
-    val userNameError: LiveData<String> = _userNameError
+    private val _userNameError = MutableSharedFlow<String>()
+    val userNameError: SharedFlow<String> = _userNameError
 
-    fun validateLogin(email: String?, password: String?): Boolean {
+    suspend fun validateLogin(email: String?, password: String?): Boolean {
         val emailErrorString = validEmail(email)
-        _emailError.value = emailErrorString
+        _emailError.emit(emailErrorString)
 
         val passwordErrorString = validPassword(password)
-        _passwordError.value = passwordErrorString
+        _passwordError.emit(passwordErrorString)
 
         return emailErrorString.isBlank() && passwordErrorString.isBlank()
     }
 
-    fun validateRegister(email: String?, password: String?, userName: String?): Boolean {
+    suspend fun validateRegister(email: String?, password: String?, userName: String?): Boolean {
         val emailErrorString = validEmail(email)
-        _emailError.value = emailErrorString
+        _emailError.emit(emailErrorString)
 
         val passwordErrorString = validPassword(password)
-        _passwordError.value = passwordErrorString
+        _passwordError.emit(passwordErrorString)
 
         val userNameErrorString = validUserName(userName)
-        _userNameError.value = userNameErrorString
+        _userNameError.emit(userNameErrorString)
 
         return emailErrorString.isBlank() &&
                 passwordErrorString.isBlank() &&
