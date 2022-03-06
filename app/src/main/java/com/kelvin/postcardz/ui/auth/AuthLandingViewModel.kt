@@ -1,12 +1,17 @@
 package com.kelvin.postcardz.ui.auth
 
 import android.util.Patterns
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.kelvin.postcardz.ui.base.PostcardBaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import timber.log.Timber
+import java.lang.Exception
 
 class AuthLandingViewModel: PostcardBaseViewModel() {
     private val _emailError = MutableSharedFlow<String>()
@@ -41,6 +46,21 @@ class AuthLandingViewModel: PostcardBaseViewModel() {
         return emailErrorString.isBlank() &&
                 passwordErrorString.isBlank() &&
                 userNameErrorString.isBlank()
+    }
+
+    fun registerUser(email: String, password: String, userName: String) {
+        val auth = Firebase.auth
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                auth.currentUser?.let {
+                    Timber.d("Welcome ${it.email}")
+                    val db = Firebase.database
+                    db.getReference("ID_USERNAMES").child(it.uid).setValue(userName)
+                }
+            } else {
+                _networkError.tryEmit(task.exception)
+            }
+        }
     }
 
     private fun validEmail(email: String?): String {
