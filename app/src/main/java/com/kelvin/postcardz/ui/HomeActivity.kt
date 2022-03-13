@@ -1,23 +1,19 @@
-package com.kelvin.sendMeAPostcard.ui
+package com.kelvin.postcardz.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.kelvin.sendMeAPostcard.R
-import com.kelvin.sendMeAPostcard.databinding.ActivityMainBinding
+import com.kelvin.postcardz.R
+import com.kelvin.postcardz.databinding.ActivityMainBinding
+import com.kelvin.postcardz.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController

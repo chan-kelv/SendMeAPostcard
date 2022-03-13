@@ -1,4 +1,4 @@
-package com.kelvin.sendMeAPostcard.ui.leftTab
+package com.kelvin.postcardz.ui.leftTab
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.kelvin.sendMeAPostcard.R
-import com.kelvin.sendMeAPostcard.databinding.FragmentSimpleBinding
+import com.kelvin.postcardz.R
+import com.kelvin.postcardz.databinding.FragmentSimpleBinding
 
 class LeftMainFragment : Fragment() {
     // don't use this one - only for setup

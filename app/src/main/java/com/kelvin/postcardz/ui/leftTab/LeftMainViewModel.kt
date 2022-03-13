@@ -1,4 +1,4 @@
-package com.kelvin.sendMeAPostcard.ui.leftTab
+package com.kelvin.postcardz.ui.leftTab
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

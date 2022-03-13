@@ -1,4 +1,4 @@
-package com.kelvin.sendMeAPostcard.hilt
+package com.kelvin.postcardz.hilt
 
 import dagger.Module
 import dagger.Provides

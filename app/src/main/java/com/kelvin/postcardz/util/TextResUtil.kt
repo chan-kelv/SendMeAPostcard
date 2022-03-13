@@ -1,4 +1,4 @@
-package com.kelvin.sendMeAPostcard.util
+package com.kelvin.postcardz.util
 
 import android.content.Context
 import android.text.SpannableString

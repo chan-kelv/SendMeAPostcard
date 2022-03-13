@@ -1,4 +1,4 @@
-package com.kelvin.sendMeAPostcard
+package com.kelvin.postcardz
 
 import org.junit.Test
 
