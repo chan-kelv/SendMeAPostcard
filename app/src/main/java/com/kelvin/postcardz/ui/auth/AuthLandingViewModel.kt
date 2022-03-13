@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import com.google.gson.annotations.JsonAdapter
 import com.kelvin.postcardz.data.UserManager
 import com.kelvin.postcardz.data.model.UserProfile
 import com.kelvin.postcardz.ui.base.PostcardBaseViewModel
@@ -57,6 +59,32 @@ class AuthLandingViewModel @Inject constructor(
                 userNameErrorString.isBlank()
     }
 
+    fun loginUser(email: String, password: String) {
+        val auth = Firebase.auth
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful && auth.currentUser != null) {
+                val user = auth.currentUser!!
+                getAuthUser(user.uid)
+            } else {
+                viewModelScope.launch {
+                    _toastError.emit(it.exception)
+                }
+            }
+        }
+    }
+
+    private fun getAuthUser(uid: String) {
+        val db = Firebase.database
+        db.getReference("ID_USERPROFILE").child(uid).get().addOnSuccessListener { task ->
+            val userProfile = Gson().fromJson(task.value.toString(), UserProfile::class.java)
+            viewModelScope.launch {
+                val success = _userAuthenticated.emit(userProfile)
+            }
+        }.addOnFailureListener {
+            _toastError.tryEmit(it)
+        }
+    }
+
     fun registerUser(email: String, password: String, userName: String) {
         val auth = Firebase.auth
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -68,7 +96,6 @@ class AuthLandingViewModel @Inject constructor(
                     db.getReference("ID_USERPROFILE").child(it.uid).setValue(user)
                     viewModelScope.launch {
                         val success = _userAuthenticated.emit(user)
-                        Timber.d("$success")
                     }
                 }
             } else {

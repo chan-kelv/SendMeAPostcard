@@ -41,7 +41,10 @@ class AuthLandingFragment: PostcardBaseFragment() {
         val emailText = authViewBinding.emailInput.text.toString()
         val passwordText = authViewBinding.passwordInput.text.toString()
         authViewModel.viewModelScope.launch {
-            authViewModel.validateLogin(emailText, passwordText)
+            val validLoginFields = authViewModel.validateLogin(emailText, passwordText)
+            if (validLoginFields) {
+                authViewModel.loginUser(emailText, passwordText)
+            }
         }
     }
 
