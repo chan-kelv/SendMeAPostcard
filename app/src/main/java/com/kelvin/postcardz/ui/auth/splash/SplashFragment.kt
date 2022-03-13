@@ -12,9 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import com.kelvin.postcardz.databinding.FragmentSplashLoadingBinding
 import com.kelvin.postcardz.ui.HomeActivity
-import com.kelvin.postcardz.ui.auth.AuthLandingFragment
 import com.kelvin.postcardz.ui.auth.AuthLandingFragment.Companion.navigateToAuthLandingFragment
-import com.kelvin.postcardz.ui.auth.setupViewBindings
 import com.kelvin.postcardz.ui.base.PostcardBaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

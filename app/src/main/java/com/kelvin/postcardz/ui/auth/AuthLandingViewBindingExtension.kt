@@ -7,13 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.kelvin.postcardz.databinding.FragmentAuthMainLandingBinding
 import com.kelvin.postcardz.ui.HomeActivity
-import com.kelvin.postcardz.ui.auth.AuthLandingFragment.Companion.navigateToAuthLandingFragment
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-fun AuthLandingFragment.setupViewBindings(
+fun AuthLandingFragment.setupViewBindingAndModelCollection(
     authViewModel: AuthLandingViewModel,
     authBinding: FragmentAuthMainLandingBinding
 ) {
@@ -36,7 +34,7 @@ fun AuthLandingFragment.setupViewBindings(
             }
             launch {
                 authViewModel.toastError.collect {
-                    Toast.makeText(this@setupViewBindings.requireContext(),
+                    Toast.makeText(this@setupViewBindingAndModelCollection.requireContext(),
                     "Error: $it",
                     Toast.LENGTH_LONG).show()
                 }
@@ -45,9 +43,9 @@ fun AuthLandingFragment.setupViewBindings(
                 authViewModel.userAuthenticated.collectLatest { userProfile ->
                     userProfile?.let {
                         authViewModel.setAuthenticatedUser(it)
-                        val intent = Intent(this@setupViewBindings.requireActivity(), HomeActivity::class.java)
+                        val intent = Intent(this@setupViewBindingAndModelCollection.requireActivity(), HomeActivity::class.java)
                         startActivity(intent)
-                        this@setupViewBindings.requireActivity().finish()
+                        this@setupViewBindingAndModelCollection.requireActivity().finish()
                     } ?: run {
                         // user error - reset everything and try again
                     }

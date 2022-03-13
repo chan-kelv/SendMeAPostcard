@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.kelvin.postcardz.R
 import com.kelvin.postcardz.databinding.FragmentAuthMainLandingBinding
@@ -29,7 +27,7 @@ class AuthLandingFragment: PostcardBaseFragment() {
         _authLandingViewBinding = FragmentAuthMainLandingBinding.inflate(inflater, container, false)
         val view = authViewBinding.root
 
-        setupViewBindings(authViewModel, authViewBinding)
+        setupViewBindingAndModelCollection(authViewModel, authViewBinding)
 
         authViewBinding.loginButton.setOnClickListener(loginClickHandler)
         authViewBinding.registerButton.setOnClickListener(registerClickHandler)

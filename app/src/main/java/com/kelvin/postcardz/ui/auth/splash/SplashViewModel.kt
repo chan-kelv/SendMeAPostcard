@@ -21,6 +21,10 @@ class SplashViewModel @Inject constructor(
     private val _foundAuthUser = MutableSharedFlow<Boolean>()
     val foundAuthUser = _foundAuthUser.asSharedFlow()
 
+    /**
+     * Determins if firebase user is saved. If it is, try to retrieve user from it and
+     * go directly to HOME if success, else go to login flow
+     */
     suspend fun attemptRetrieveUser() {
         val fbUser = FirebaseAuth.getInstance().currentUser
         if (fbUser != null) {
@@ -42,15 +46,6 @@ class SplashViewModel @Inject constructor(
                     }
         } else {
             _foundAuthUser.emit(false)
-        }
-    }
-
-    // TODO simple repo not worth making its own class for now?
-    class SplashRepository @Inject constructor(
-        private val userPref: UserSettingsSharedPrefManager
-    ) {
-        fun isUserSignedIn(): Boolean {
-            return userPref.isUsersFirstTime()
         }
     }
 }

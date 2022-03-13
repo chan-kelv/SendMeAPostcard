@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthLandingViewModel @Inject constructor(
     private val userManager: UserManager
-): PostcardBaseViewModel() {
+) : PostcardBaseViewModel() {
     private val _emailError = MutableSharedFlow<String>()
     val emailError = _emailError.asSharedFlow()
 
@@ -42,21 +42,6 @@ class AuthLandingViewModel @Inject constructor(
         _passwordError.emit(passwordErrorString)
 
         return emailErrorString.isBlank() && passwordErrorString.isBlank()
-    }
-
-    suspend fun validateRegister(email: String?, password: String?, userName: String?): Boolean {
-        val emailErrorString = validEmail(email)
-        _emailError.emit(emailErrorString)
-
-        val passwordErrorString = validPassword(password)
-        _passwordError.emit(passwordErrorString)
-
-        val userNameErrorString = validUserName(userName)
-        _userNameError.emit(userNameErrorString)
-
-        return emailErrorString.isBlank() &&
-                passwordErrorString.isBlank() &&
-                userNameErrorString.isBlank()
     }
 
     fun loginUser(email: String, password: String) {
@@ -83,6 +68,21 @@ class AuthLandingViewModel @Inject constructor(
         }.addOnFailureListener {
             _toastError.tryEmit(it)
         }
+    }
+
+    suspend fun validateRegister(email: String?, password: String?, userName: String?): Boolean {
+        val emailErrorString = validEmail(email)
+        _emailError.emit(emailErrorString)
+
+        val passwordErrorString = validPassword(password)
+        _passwordError.emit(passwordErrorString)
+
+        val userNameErrorString = validUserName(userName)
+        _userNameError.emit(userNameErrorString)
+
+        return emailErrorString.isBlank() &&
+                passwordErrorString.isBlank() &&
+                userNameErrorString.isBlank()
     }
 
     fun registerUser(email: String, password: String, userName: String) {
@@ -116,17 +116,17 @@ class AuthLandingViewModel @Inject constructor(
         }
     }
 
-    private fun validPassword(password: String?) : String {
+    private fun validPassword(password: String?): String {
         return if (password.isNullOrBlank())
             "Password is empty"
-        else if (password.length < 6){
+        else if (password.length < 6) {
             "Password needs to be at least 6 characters long"
         } else {
             ""
         }
     }
 
-    private fun validUserName(userName: String?) : String {
+    private fun validUserName(userName: String?): String {
         return when {
             userName.isNullOrBlank() -> "UserName is empty"
             userName.length < 2 -> {
